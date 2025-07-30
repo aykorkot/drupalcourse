@@ -1,0 +1,15 @@
+<h2>{{ title }}</h2>
+
+<div class="custom-articles">
+  {% for article in articles %}
+    <article class="article-item">
+      <h3>{{ article.title }}</h3>
+      {% if article.image_url %}
+        <img src="{{ article.image_url }}" alt="{{ article.title }}" style="max-width:100px;">
+      {% endif %}
+      <div class="article-body">{{ article.body|raw }}</div>
+    </article>
+  {% else %}
+    <p>Aucun article trouvé.</p>
+  {% endfor %}
+</div>
