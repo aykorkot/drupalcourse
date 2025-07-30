@@ -1,0 +1,7 @@
+custom_article_list.articles:
+  path: '/custom-articles'
+  defaults:
+    _controller: '\Drupal\CustomArticlesController\Controller\CustomArticlesController::list'
+    _title: 'Articles personnalisés'
+  requirements:
+    _permission: 'access content'

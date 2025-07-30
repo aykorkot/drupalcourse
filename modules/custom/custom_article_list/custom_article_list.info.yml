@@ -1,0 +1,7 @@
+name: 'Custom Article List'
+type: module
+description: 'Affiche une liste d’articles personnalisés.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - node
