@@ -5,90 +5,88 @@ namespace Drupal\custom_article_list\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
+use Drupal\Core\Pager\PagerManagerInterface;
+use Drupal\Core\Pager\PagerParametersInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class CustomArticlesController extends ControllerBase {
 
-  // public function list() {
-  //   $items = [];
+  protected $pagerManager;
+  protected $pagerParameters;
 
-  //   $nids = \Drupal::entityQuery('node')
-  //     ->condition('type', 'article_personnalise')
-  //     ->accessCheck(TRUE)
-  //     ->execute();
+  // Injection des services pager (optionnel mais recommandé)
+  public function __construct(PagerManagerInterface $pager_manager, PagerParametersInterface $pager_parameters) {
+    $this->pagerManager = $pager_manager;
+    $this->pagerParameters = $pager_parameters;
+  }
 
-  //   if (!empty($nids)) {
-  //     $nodes = Node::loadMultiple($nids);
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('pager.manager'),
+      $container->get('pager.parameters')
+    );
+  }
 
-  //     foreach ($nodes as $node) {
-  //       $titre = $node->hasField('field_titre') ? $node->get('field_titre')->value : '';
-  //       $body = $node->hasField('body') ? $node->get('body')->value : '';
-  //       $image_url = '';
-
-  //       // Vérifie si une image existe
-  //       if ($node->hasField('field_image') && !$node->get('field_image')->isEmpty()) {
-  //         $file = $node->get('field_image')->entity;
-  //         if ($file instanceof File) {
-  //           $uri = $file->getFileUri();
-  //           $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
-  //         }
-  //       }
-
-  //       $html = '<div class="article-item">';
-  //       if (!empty($titre)) {
-  //         $html .= '<h3>' . $titre . '</h3>';
-  //       }
-  //       if (!empty($image_url)) {
-  //         $html .= '<img src="' . $image_url . '" style="max-width:300px;">';
-  //       }
-  //       $html .= '<p>' . $body . '</p>';
-  //       $html .= '</div>';
-
-  //       $items[] = ['#markup' => $html];
-  //     }
-  //   }
-
-  //   return [
-  //     '#theme' => 'item_list',
-  //     '#items' => $items,
-  //     '#title' => $this->t('Liste des articles personnalisés'),
-  //   ];
-  // }
   public function list() {
-    $articles = [];
+  $limit = 3; // Articles par page
+  $current_page = $this->pagerParameters->findPage();
+  $offset = $current_page * $limit;
 
-    $nids = \Drupal::entityQuery('node')
-      ->condition('type', 'article_personnalise')
-      ->accessCheck(TRUE)
-      ->execute();
+  // Requête pour compter le total
+  $count_query = \Drupal::entityQuery('node')
+    ->condition('type', 'article_personnalise')
+    ->condition('status', 1)
+    ->accessCheck(TRUE);
+  $total = $count_query->count()->execute();
 
-    if (!empty($nids)) {
-      $nodes = Node::loadMultiple($nids);
+  // Nouvelle requête pour récupérer les nids avec limite et offset
+  $query = \Drupal::entityQuery('node')
+    ->condition('type', 'article_personnalise')
+    ->condition('status', 1)
+    ->accessCheck(TRUE)
+    ->range($offset, $limit);
+  $nids = $query->execute();
 
-      foreach ($nodes as $node) {
-        $titre = $node->hasField('field_titre') ? $node->get('field_titre')->value : '';
-        $body = $node->hasField('body') ? $node->get('body')->value : '';
-        $image_url = '';
+  // Charger les nœuds seulement si $nids est un tableau et non vide
+  $nodes = [];
+  if (!empty($nids) && is_array($nids)) {
+    $nodes = Node::loadMultiple($nids);
+  }
 
-        if ($node->hasField('field_image') && !$node->get('field_image')->isEmpty()) {
-          $file = $node->get('field_image')->entity;
-          if ($file) {
-            $uri = $file->getFileUri();
-            $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
-          }
-        }
+  $articles = [];
 
-        $articles[] = [
-          'title' => $titre,
-          'body' => $body,
-          'image_url' => $image_url,
-        ];
+  foreach ($nodes as $node) {
+    $titre = $node->hasField('field_titre') ? $node->get('field_titre')->value : '';
+    $body = $node->hasField('body') ? $node->get('body')->value : '';
+    $image_url = '';
+
+    if ($node->hasField('field_image') && !$node->get('field_image')->isEmpty()) {
+      $file = $node->get('field_image')->entity;
+      if ($file instanceof File) {
+        $uri = $file->getFileUri();
+        $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
       }
     }
 
-    return [
-      '#theme' => 'custom_articles_list', // nom du template Twig
-      '#articles' => $articles,
-      '#title' => $this->t('Liste des articles personnalisés'),
+    $articles[] = [
+      'title' => $titre,
+      'body' => $body,
+      'image_url' => $image_url,
     ];
   }
+
+  // Création du pager Drupal
+  $this->pagerManager->createPager($total, $limit);
+
+  return [
+    '#theme' => 'custom_articles_list',
+    '#articles' => $articles,
+    '#title' => $this->t('Liste des articles personnalisés'),
+    '#pager' => [
+      '#type' => 'pager',
+    ],
+  ];
+}
+
+
 }

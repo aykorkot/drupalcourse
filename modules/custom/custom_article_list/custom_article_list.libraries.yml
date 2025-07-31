@@ -1,0 +1,5 @@
+custom_article_list.styles:
+  version: 1.x
+  css:
+    theme:
+      css/custom_article_list.css: {}

@@ -6,7 +6,7 @@
 function custom_article_list_theme($existing, $type, $theme, $path) {
   return [
     'custom_articles_list' => [
-      'variables' => ['articles' => NULL, 'title' => NULL],
+      'variables' => ['articles' => NULL, 'title' => NULL, 'pager' => NULL],
       'template' => 'custom-articles-list', // nom du fichier twig sans extension
       'path' => $path . '/templates',
     ],

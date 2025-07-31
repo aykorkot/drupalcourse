@@ -1,0 +1,47 @@
+.custom-listing-page {
+    h2 {
+        font-size: 25px;
+        margin: 0 0 30px;
+        text-align: center;
+    }
+}
+
+.custom-articles {
+    display: flex;
+    gap: 15px;
+    margin: 0 0 30px;
+}
+
+article.article-item {
+    width: 33.33%;
+    padding: 30px 20px;
+    background: #f1f1f182;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+article.article-item h3 {
+    margin: 0 0 15px;
+    font-size: 20px;
+    text-align: left;
+    line-height: 1;
+    order: 2;
+}
+
+.article-body {
+    text-align: left;
+    order: 3;
+}
+
+.article-item img {
+    margin: 0 auto 40px;
+    order: 1;
+}
+
+.article-body p {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
