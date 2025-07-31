@@ -1,0 +1,15 @@
+.contact-form-wrapper {
+    padding: 40px 40px;
+    background: #f1f1f182;
+    border-radius: 8px;
+}
+
+.contact-form-wrapper h2 {
+    font-size: 25px;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.contact-form-wrapper form input {
+    width: 100%;
+}

@@ -1,0 +1,6 @@
+name: 'Custom Contact'
+type: module
+description: 'Module formulaire de contact'
+core_version_requirement: ^10
+package: Custom
+dependencies: []

@@ -1,0 +1,7 @@
+custom_contact.contact_form:
+  path: '/contact-form'
+  defaults:
+    _title: 'Contactez-nous'
+    _controller: '\Drupal\custom_contact\Controller\ContactFormController::formPage'
+  requirements:
+    _permission: 'access content'
