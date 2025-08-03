@@ -827,3 +827,12 @@ $databases['default']['default'] = array (
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
 $settings['config_sync_directory'] = 'sites/default/files/config_xttDCtudoc7pSbPsoyO_hB8PaJYVLZ_pNdn5C78ZjlHrbs9dOUMcvoRpaeAH6G52XrHYP1HiaQ/sync';
+
+
+// Désactivation du cache pour le rendu, cache dynamique et cache par défaut.
+$settings['cache']['bins']['render'] = 'cache.backend.memory';
+$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.memory';
+$settings['cache']['default'] = 'cache.backend.memory';
+
+// Facultatif : désactiver le cache des pages (si module Internal Page Cache activé)
+$settings['cache']['bins']['page'] = 'cache.backend.memory';

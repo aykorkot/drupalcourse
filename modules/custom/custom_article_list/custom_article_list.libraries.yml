@@ -3,3 +3,11 @@ custom_article_list.styles:
   css:
     theme:
       css/custom_article_list.css: {}
+
+article_api_block:
+  version: 1.x
+  js:
+    js/load-articles.js: {}
+  dependencies:
+    - core/jquery
+    - core/once

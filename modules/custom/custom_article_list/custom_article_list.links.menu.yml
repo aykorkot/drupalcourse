@@ -1,0 +1,6 @@
+custom_article_list.settings:
+  title: 'Configuration des articles personnalisés'
+  description: 'Configurer le nombre d’articles à afficher dans le bloc.'
+  parent: system.admin_config_content
+  route_name: custom_article_list.settings
+  weight: 100

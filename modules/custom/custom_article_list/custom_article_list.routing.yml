@@ -5,3 +5,21 @@ custom_article_list.articles:
     _title: 'Articles personnalisés'
   requirements:
     _permission: 'access content'
+
+custom_article_list.settings:
+  path: '/admin/config/content/custom-article-list'
+  defaults:
+    _form: '\Drupal\custom_article_list\Form\ArticleSettingForm'
+    _title: 'Configuration des articles personnalisés'
+  requirements:
+    _permission: 'administer site configuration'
+
+custom_article_list.api:
+  path: '/api/articles'
+  defaults:
+    _controller: '\Drupal\custom_article_list\Controller\ArticleApiController::getArticles'
+    _title: 'Articles JSON'
+  requirements:
+    _permission: 'access content'
+  options:
+    _format: 'json'
