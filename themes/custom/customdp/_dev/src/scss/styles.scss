@@ -1,0 +1,21 @@
+body {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: black;
+  background-color: white;
+  background-image: none;
+  line-height: 1.25em;
+}
+
+.header {
+    background: red;
+}
+
+.sidebar {
+    background: #000;
+}
+
+.footer {
+    background: green;
+}

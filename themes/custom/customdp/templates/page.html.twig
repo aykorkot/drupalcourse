@@ -1,0 +1,16 @@
+
+{% include '@customdp/partials/header.html.twig' %}
+
+<div class="main-content container">
+    <div class="row">
+        <main class="col-md-8" role="main">
+            {{ page.content }}
+        </main>
+
+        {% if page.sidebar_first %}
+            {% include '@customdp/partials/sidebar.html.twig' %}
+        {% endif %}
+    </div>
+</div>
+
+{% include '@customdp/partials/footer.html.twig' %}

@@ -1,13 +1,20 @@
-name: CustomDP
+name: customdp
 type: theme
-description: 'Custom theme for DP10'
+description: 'Thème personnalisé customdp'
 core_version_requirement: ^10
-base theme: stable9
-package: Custom
+base theme: olivero
+
 libraries:
   - customdp/global-assets
+
+twig:
+  namespaces:
+    partials: templates/partials
+
 regions:
   header: 'Header'
+  primary_menu: 'Primary Menu'
   content: 'Content'
-  sidebar: 'Sidebar'
+  sidebar_first: 'Sidebar First'
+  footer_menu: 'Footer menu'
   footer: 'Footer'
