@@ -1,0 +1,6 @@
+{# templates/layout/region.html.twig #}
+{% if content %}
+  <div{{ attributes.addClass('region', 'region--' ~ region) }}>
+    {{ content }}
+  </div>
+{% endif %}

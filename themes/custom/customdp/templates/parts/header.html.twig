@@ -1,0 +1,20 @@
+{# templates/parts/header.html.twig #}
+<header class="site-header">
+  <div class="logo">
+    {% set theme_logo = site_logo|default(logo|default(null)) %}
+    {% if theme_logo %}
+      <a href="{{ path('<front>') }}" rel="home" class="site-logo">
+        <img src="{{ theme_logo }}" alt="{{ 'Accueil'|t }}">
+      </a>
+    {% else %}
+      <a href="{{ path('<front>') }}" rel="home" class="site-logo-text">MonLogo</a>
+    {% endif %}
+  </div>
+
+  <nav class="main-menu">
+    {# Place le bloc "Menu principal" dans la région primary_menu via l'UI #}
+    {{ page.primary_menu }}
+  </nav>
+
+  <button class="search-icon" id="searchBtn" aria-label="{{ 'Ouvrir la recherche'|t }}">🔍</button>
+</header>

@@ -1,0 +1,25 @@
+{# templates/layout/page.html.twig #}
+
+{# Header #}
+{% include "@customdp/parts/header.html.twig" %}
+
+<main class="container">
+  <section id="main-content" class="content">
+    {{ page.content }}
+  </section>
+
+  <aside class="sidebar">
+    {{ page.sidebar }}
+  </aside>
+</main>
+
+{# Footer #}
+{% include "@customdp/parts/footer.html.twig" %}
+
+{# Popup recherche (contenu de page) #}
+<div class="search-popup" id="searchPopup">
+  <div class="popup-content">
+    <span class="close-btn" id="closePopup">&times;</span>
+    <input type="text" placeholder="{{ 'Tapez votre recherche…'|t }}">
+  </div>
+</div>

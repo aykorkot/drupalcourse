@@ -1,20 +1,17 @@
 name: customdp
 type: theme
-description: 'Thème personnalisé customdp'
-core_version_requirement: ^10
+description: 'Thème custom : header, footer, sidebar, popup recherche'
+core_version_requirement: ^9 || ^10 || ^11
 base theme: olivero
 
 libraries:
-  - customdp/global-assets
-
-twig:
-  namespaces:
-    partials: templates/partials
+  - customdp/global
 
 regions:
-  header: 'Header'
-  primary_menu: 'Primary Menu'
-  content: 'Content'
-  sidebar_first: 'Sidebar First'
-  footer_menu: 'Footer menu'
-  footer: 'Footer'
+  header: Header
+  primary_menu: Menu principal
+  content: Contenu
+  sidebar: Sidebar
+  footer_first: Footer colonne 1
+  footer_second: Footer colonne 2
+  footer_third: Footer colonne 3

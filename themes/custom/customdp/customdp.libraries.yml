@@ -1,9 +1,9 @@
-global-assets:
-  version: 1.x
+global:
   css:
     theme:
-      _dev/dist/style.css: {}
+      css/style.css: {}
   js:
-    _dev/dist/bundle.js: {}
+    js/script.js: {}
   dependencies:
+    - core/drupal
     - core/jquery
